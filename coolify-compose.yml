@@ -13,7 +13,8 @@ services:
       - "appwrite-functions:/storage/functions:rw"
       - "appwrite-sites:/storage/sites:rw"
       - "appwrite-builds:/storage/builds:rw"
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -41,8 +42,8 @@ services:
       - "_APP_DOMAIN_FUNCTIONS=${MY_DOMAIN_APPWRITE:-appwrite.itsrofly.com}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -125,7 +126,8 @@ services:
     image: appwrite-pg
     entrypoint: realtime
     container_name: appwrite-realtime
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -134,8 +136,8 @@ services:
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -148,15 +150,16 @@ services:
     image: appwrite-pg
     entrypoint: worker-audits
     container_name: appwrite-worker-audits
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -168,7 +171,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-webhooks
     container_name: appwrite-worker-webhooks
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -183,14 +187,15 @@ services:
       - _APP_DB_PASS=${_APP_DB_PASS:-password}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-deletes:
     image: appwrite-pg
     entrypoint: worker-deletes
     container_name: appwrite-worker-deletes
-
+    depends_on:
+      - appwrite-redis
     volumes:
       - "appwrite-uploads:/storage/uploads:rw"
       - "appwrite-cache:/storage/cache:rw"
@@ -204,8 +209,8 @@ services:
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -247,15 +252,16 @@ services:
     image: appwrite-pg
     entrypoint: worker-databases
     container_name: appwrite-worker-databases
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -267,7 +273,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-builds
     container_name: appwrite-worker-builds
-
+    depends_on:
+      - appwrite-redis
     volumes:
       - "appwrite-functions:/storage/functions:rw"
       - "appwrite-sites:/storage/sites:rw"
@@ -281,8 +288,8 @@ services:
       - "_APP_EXECUTOR_HOST=${_APP_EXECUTOR_HOST:-http://appwrite-executor/v1}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -329,7 +336,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-certificates
     container_name: appwrite-worker-certificates
-
+    depends_on:
+      - appwrite-redis
     volumes:
       - "appwrite-config:/storage/config:rw"
       - "appwrite-certificates:/storage/certificates:rw"
@@ -345,8 +353,8 @@ services:
       - "_APP_EMAIL_CERTIFICATES=${_APP_EMAIL_CERTIFICATES:-enabled}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -359,6 +367,7 @@ services:
     entrypoint: worker-functions
     container_name: appwrite-worker-functions
     depends_on:
+      - appwrite-redis
       - openruntimes-executor
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -368,8 +377,8 @@ services:
       - "_APP_OPTIONS_FORCE_HTTPS=${_APP_OPTIONS_FORCE_HTTPS:-disabled}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -391,6 +400,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-mails
     container_name: appwrite-worker-mails
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -405,8 +416,8 @@ services:
       - _APP_DB_PASS=${_APP_DB_PASS:-password}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_SMTP_HOST=${_APP_SMTP_HOST}"
       - "_APP_SMTP_PORT=${_APP_SMTP_PORT}"
       - "_APP_SMTP_SECURE=${_APP_SMTP_SECURE}"
@@ -421,14 +432,16 @@ services:
     container_name: appwrite-worker-messaging
     volumes:
       - "appwrite-uploads:/storage/uploads:rw"
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -466,6 +479,8 @@ services:
     container_name: appwrite-worker-migrations
     volumes:
       - "appwrite-imports:/storage/imports:rw"
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -477,8 +492,8 @@ services:
       - "_APP_EMAIL_SECURITY=${_APP_EMAIL_SECURITY:-certs@appwrite.io}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -492,6 +507,8 @@ services:
     image: appwrite-pg
     entrypoint: maintenance
     container_name: appwrite-task-maintenance
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -503,8 +520,8 @@ services:
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -523,7 +540,8 @@ services:
     image: appwrite-pg
     container_name: appwrite-task-stats-resources
     entrypoint: stats-resources
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -536,8 +554,8 @@ services:
       - _APP_DB_PASS=${_APP_DB_PASS:-password}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_DATABASE_SHARED_TABLES=${_APP_DATABASE_SHARED_TABLES}"
@@ -546,7 +564,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-stats-resources
     container_name: appwrite-worker-stats-resources
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -559,8 +578,8 @@ services:
       - _APP_DB_PASS=${_APP_DB_PASS:-password}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_STATS_RESOURCES_INTERVAL=${_APP_STATS_RESOURCES_INTERVAL}"
@@ -568,7 +587,8 @@ services:
     image: appwrite-pg
     entrypoint: worker-stats-usage
     container_name: appwrite-worker-stats-usage
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -581,8 +601,8 @@ services:
       - _APP_DB_PASS=${_APP_DB_PASS:-password}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_USAGE_AGGREGATION_INTERVAL=${_APP_USAGE_AGGREGATION_INTERVAL:-30}"
@@ -590,15 +610,16 @@ services:
     image: appwrite-pg
     entrypoint: schedule-functions
     container_name: appwrite-task-scheduler-functions
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -609,15 +630,16 @@ services:
     image: appwrite-pg
     entrypoint: schedule-executions
     container_name: appwrite-task-scheduler-executions
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -628,15 +650,16 @@ services:
     image: appwrite-pg
     entrypoint: schedule-messages
     container_name: appwrite-task-scheduler-messages
-
+    depends_on:
+      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=${PASSWORD_64_APPWRITE}
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -699,6 +722,21 @@ services:
       - "OPR_EXECUTOR_STORAGE_WASABI_REGION=${_APP_STORAGE_WASABI_REGION}"
       - "OPR_EXECUTOR_STORAGE_WASABI_BUCKET=${_APP_STORAGE_WASABI_BUCKET}"
 
+  appwrite-redis:
+    image: redis:7.2.4-alpine
+    container_name: appwrite-redis
+    command: >
+      redis-server
+      --maxmemory            512mb
+      --maxmemory-policy     allkeys-lru
+      --maxmemory-samples    5
+    ports:
+      - "6379:6379"
+    networks:
+      - appwrite
+    volumes:
+      - appwrite-redis:/data:rw
+
 networks:
   runtimes:
     name: runtimes
@@ -706,6 +744,7 @@ volumes:
   appwrite-cache: null
   appwrite-uploads: null
   appwrite-imports: null
+  appwrite-redis: null
   appwrite-certificates: null
   appwrite-functions: null
   appwrite-sites: null
