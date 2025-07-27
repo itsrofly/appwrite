@@ -57,7 +57,6 @@ class Builds extends Action
     {
         $this
             ->desc('Builds worker')
-            ->groups(['builds'])
             ->inject('message')
             ->inject('project')
             ->inject('dbForPlatform')
@@ -74,7 +73,6 @@ class Builds extends Action
             ->inject('deviceForFiles')
             ->inject('log')
             ->inject('executor')
-            ->inject('plan')
             ->callback([$this, 'action']);
     }
 
@@ -94,7 +92,6 @@ class Builds extends Action
      * @param Device $deviceForFiles
      * @param Log $log
      * @param Executor $executor
-     * @param array $plan
      * @return void
      * @throws \Utopia\Database\Exception
      */
@@ -114,8 +111,7 @@ class Builds extends Action
         callable $isResourceBlocked,
         Device $deviceForFiles,
         Log $log,
-        Executor $executor,
-        array $plan
+        Executor $executor
     ): void {
         $payload = $message->getPayload() ?? [];
 
@@ -154,8 +150,7 @@ class Builds extends Action
                     $template,
                     $isResourceBlocked,
                     $log,
-                    $executor,
-                    $plan
+                    $executor
                 );
                 break;
 
@@ -182,7 +177,6 @@ class Builds extends Action
      * @param Document $template
      * @param Log $log
      * @param Executor $executor
-     * @param array $plan
      * @return void
      * @throws \Utopia\Database\Exception
      *
@@ -206,8 +200,7 @@ class Builds extends Action
         Document $template,
         callable $isResourceBlocked,
         Log $log,
-        Executor $executor,
-        array $plan
+        Executor $executor
     ): void {
         $resourceKey = match ($resource->getCollection()) {
             'functions' => 'functionId',
@@ -483,12 +476,8 @@ class Builds extends Action
                 $directorySize = $localDevice->getDirectorySize($tmpDirectory);
                 $sizeLimit = (int)System::getEnv('_APP_COMPUTE_SIZE_LIMIT', '30000000');
 
-                if (isset($plan['deploymentSize'])) {
-                    $sizeLimit = (int) $plan['deploymentSize'] * 1000 * 1000;
-                }
-
-                if ($directorySize > $sizeLimit && $sizeLimit !== 0) {
-                    throw new \Exception('Repository directory size should be less than ' . number_format($sizeLimit / (1000 * 1000), 2) . ' MBs.');
+                if ($directorySize > $sizeLimit) {
+                    throw new \Exception('Repository directory size should be less than ' . number_format($sizeLimit / 1048576, 2) . ' MBs.');
                 }
 
                 Console::execute('find ' . \escapeshellarg($tmpDirectory) . ' -type d -name ".git" -exec rm -rf {} +', '', $stdout, $stderr);
@@ -814,11 +803,8 @@ class Builds extends Action
             $durationEnd = \microtime(true);
 
             $buildSizeLimit = (int)System::getEnv('_APP_COMPUTE_BUILD_SIZE_LIMIT', '2000000000');
-            if (isset($plan['buildSize'])) {
-                $buildSizeLimit = $plan['buildSize'] * 1000 * 1000;
-            }
-            if ($response['size'] > $buildSizeLimit && $buildSizeLimit !== 0) {
-                throw new \Exception('Build size should be less than ' . number_format($buildSizeLimit / (1000 * 1000), 2) . ' MBs.');
+            if ($response['size'] > $buildSizeLimit) {
+                throw new \Exception('Build size should be less than ' . number_format($buildSizeLimit / 1048576, 2) . ' MBs.');
             }
 
             /** Update the build document */
@@ -1232,22 +1218,13 @@ class Builds extends Action
                 $message .= "\n[31m" . $error;
             }
 
-            // Combine with previous logs if deployment got past build process
-            $previousLogs = '';
-            if (!empty($deployment->getAttribute('buildEndedAt', ''))) {
-                $previousLogs = $deployment->getAttribute('buildLogs', '');
-                if (!empty($previousLogs)) {
-                    $message = $previousLogs . "\n" . $message;
-                }
-            }
-
             $endTime = DateTime::now();
             $durationEnd = \microtime(true);
             $deployment->setAttribute('buildEndedAt', $endTime);
             $deployment->setAttribute('buildDuration', \intval(\ceil($durationEnd - $durationStart)));
             $deployment->setAttribute('status', 'failed');
-
             $deployment->setAttribute('buildLogs', $message);
+
             $deployment = $dbForProject->updateDocument('deployments', $deploymentId, $deployment);
 
             if ($deployment->getInternalId() === $resource->getAttribute('latestDeploymentInternalId', '')) {

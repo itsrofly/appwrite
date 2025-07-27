@@ -357,7 +357,7 @@ class StatsUsage extends Action
                     break;
             }
         } catch (Throwable $e) {
-            Console::error("[reducer] " . " {DateTime::now()} " . " {$project->getInternalId()} " . " {$e->getMessage()}");
+            console::error("[reducer] " . " {DateTime::now()} " . " {$project->getInternalId()} " . " {$e->getMessage()}");
         }
     }
 
@@ -376,7 +376,7 @@ class StatsUsage extends Action
                 continue;
             }
 
-            Console::log('['.DateTime::now().'] Id: '.$project->getId(). ' InternalId: '.$project->getInternalId(). ' Db: '.$project->getAttribute('database').' ReceivedAt: '.$receivedAt. ' Keys: '.$numberOfKeys);
+            console::log('['.DateTime::now().'] Id: '.$project->getId(). ' InternalId: '.$project->getInternalId(). ' Db: '.$project->getAttribute('database').' ReceivedAt: '.$receivedAt. ' Keys: '.$numberOfKeys);
 
             try {
                 foreach ($stats['keys'] ?? [] as $key => $value) {
@@ -413,7 +413,7 @@ class StatsUsage extends Action
                     }
                 }
             } catch (Exception $e) {
-                Console::error('[' . DateTime::now() . '] project [' . $project->getInternalId() . '] database [' . $project['database'] . '] ' . ' ' . $e->getMessage());
+                console::error('[' . DateTime::now() . '] project [' . $project->getInternalId() . '] database [' . $project['database'] . '] ' . ' ' . $e->getMessage());
             }
         }
 
@@ -437,7 +437,7 @@ class StatsUsage extends Action
 
     }
 
-    protected function prepareForLogsDB(Document $project, Document $stat): void
+    protected function prepareForLogsDB(Document $project, Document $stat)
     {
         if (System::getEnv('_APP_STATS_USAGE_DUAL_WRITING', 'disabled') === 'disabled') {
             return;
@@ -462,7 +462,8 @@ class StatsUsage extends Action
             return;
         }
 
-        $dbForLogs = ($this->getLogsDB)()
+        $dbForLogs = call_user_func($this->getLogsDB);
+        $dbForLogs
             ->setTenant(null)
             ->setTenantPerDocument(true);
 
@@ -477,5 +478,6 @@ class StatsUsage extends Action
         } catch (Throwable $th) {
             Console::error($th->getMessage());
         }
+        $this->register->get('pools')->get('logs')->reclaim();
     }
 }

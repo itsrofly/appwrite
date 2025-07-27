@@ -3,19 +3,14 @@
 namespace Appwrite\Platform\Tasks;
 
 use Appwrite\ClamAV\Network;
-use Appwrite\PubSub\Adapter\Pool as PubSubPool;
-use PHPMailer\PHPMailer\PHPMailer;
+use Appwrite\PubSub\Adapter;
 use Utopia\App;
-use Utopia\Cache\Adapter\Pool as CachePool;
 use Utopia\CLI\Console;
 use Utopia\Config\Config;
-use Utopia\Database\Adapter\Pool as DatabasePool;
 use Utopia\Domains\Domain;
 use Utopia\DSN\DSN;
 use Utopia\Logger\Logger;
 use Utopia\Platform\Action;
-use Utopia\Pools\Group;
-use Utopia\Queue\Broker\Pool as BrokerPool;
 use Utopia\Registry\Registry;
 use Utopia\Storage\Device\Local;
 use Utopia\Storage\Storage;
@@ -94,9 +89,9 @@ class Doctor extends Action
             Console::log('🟢 Abuse protection is enabled');
         }
 
-        $authWhitelistRoot = System::getEnv('_APP_CONSOLE_WHITELIST_ROOT');
-        $authWhitelistEmails = System::getEnv('_APP_CONSOLE_WHITELIST_EMAILS');
-        $authWhitelistIPs = System::getEnv('_APP_CONSOLE_WHITELIST_IPS');
+        $authWhitelistRoot = System::getEnv('_APP_CONSOLE_WHITELIST_ROOT', null);
+        $authWhitelistEmails = System::getEnv('_APP_CONSOLE_WHITELIST_EMAILS', null);
+        $authWhitelistIPs = System::getEnv('_APP_CONSOLE_WHITELIST_IPS', null);
 
         if (
             empty($authWhitelistRoot)
@@ -132,16 +127,19 @@ class Doctor extends Action
             } else {
                 Console::log('🟢 Logging adapter is enabled (' . $providerName . ')');
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $th) {
             Console::log('🔴 Logging adapter is misconfigured');
         }
 
         \usleep(200 * 1000); // Sleep for 0.2 seconds
 
-        Console::log("\n" . '[Connectivity]');
+        try {
+            Console::log("\n" . '[Connectivity]');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
-        /** @var Group $pools */
-        $pools = $register->get('pools');
+        $pools = $register->get('pools'); /** @var \Utopia\Pools\Group $pools */
 
         $configs = [
             'Console.DB' => Config::getParam('pools-console'),
@@ -151,22 +149,20 @@ class Doctor extends Action
         foreach ($configs as $key => $config) {
             foreach ($config as $database) {
                 try {
-                    $adapter = new DatabasePool($pools->get($database));
+                    $adapter = $pools->get($database)->pop()->getResource();
 
                     if ($adapter->ping()) {
                         Console::success('🟢 ' . str_pad("{$key}({$database})", 50, '.') . 'connected');
                     } else {
                         Console::error('🔴 ' . str_pad("{$key}({$database})", 47, '.') . 'disconnected');
                     }
-                } catch (\Throwable) {
+                } catch (\Throwable $th) {
                     Console::error('🔴 ' . str_pad("{$key}.({$database})", 47, '.') . 'disconnected');
                 }
             }
         }
 
-        /** @var Group $pools */
-        $pools = $register->get('pools');
-
+        $pools = $register->get('pools'); /** @var \Utopia\Pools\Group $pools */
         $configs = [
             'Cache' => Config::getParam('pools-cache'),
             'Queue' => Config::getParam('pools-queue'),
@@ -176,18 +172,15 @@ class Doctor extends Action
         foreach ($configs as $key => $config) {
             foreach ($config as $pool) {
                 try {
-                    $adapter = match($key) {
-                        'Cache' => new CachePool($pools->get($pool)),
-                        'Queue' => new BrokerPool($pools->get($pool)),
-                        'PubSub' => new PubSubPool($pools->get($pool)),
-                    };
+                    /** @var Adapter $adapter */
+                    $adapter = $pools->get($pool)->pop()->getResource();
 
                     if ($adapter->ping()) {
                         Console::success('🟢 ' . str_pad("{$key}({$pool})", 50, '.') . 'connected');
                     } else {
                         Console::error('🔴 ' . str_pad("{$key}({$pool})", 47, '.') . 'disconnected');
                     }
-                } catch (\Throwable) {
+                } catch (\Throwable $th) {
                     Console::error('🔴 ' . str_pad("{$key}({$pool})", 47, '.') . 'disconnected');
                 }
             }
@@ -205,14 +198,13 @@ class Doctor extends Action
                 } else {
                     Console::error('🔴 ' . str_pad("Antivirus", 47, '.') . 'disconnected');
                 }
-            } catch (\Throwable) {
+            } catch (\Throwable $th) {
                 Console::error('🔴 ' . str_pad("Antivirus", 47, '.') . 'disconnected');
             }
         }
 
         try {
-            /* @var PHPMailer $mail */
-            $mail = $register->get('smtp');
+            $mail = $register->get('smtp'); /* @var $mail \PHPMailer\PHPMailer\PHPMailer */
 
             $mail->addAddress('demo@example.com', 'Example.com');
             $mail->Subject = 'Test SMTP Connection';
@@ -221,7 +213,7 @@ class Doctor extends Action
 
             $mail->send();
             Console::success('🟢 ' . str_pad("SMTP", 50, '.') . 'connected');
-        } catch (\Throwable) {
+        } catch (\Throwable $th) {
             Console::error('🔴 ' . str_pad("SMTP", 47, '.') . 'disconnected');
         }
 
@@ -295,7 +287,7 @@ class Doctor extends Action
                     Console::error('Failed to check for a newer version' . "\n");
                 }
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $th) {
             Console::error('Failed to check for a newer version' . "\n");
         }
     }

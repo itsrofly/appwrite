@@ -107,15 +107,6 @@ return [
                 'filter' => ''
             ],
             [
-                'name' => '_APP_DOMAIN_SITES',
-                'description' => 'A domain to use for site preview URLs.',
-                'introduction' => '',
-                'default' => 'sites.localhost',
-                'required' => false,
-                'question' => '',
-                'filter' => ''
-            ],
-            [
                 'name' => '_APP_DOMAIN_TARGET',
                 'description' => 'Deprecated since 1.7.0. A DNS A record hostname to serve as a CNAME target for your Appwrite custom domains. You can use the same value as used for the Appwrite \'_APP_DOMAIN\' variable. The default value is \'localhost\'.',
                 'introduction' => '',
@@ -338,6 +329,15 @@ return [
                 'default' => 1024,
                 'required' => false,
                 'question' => '',
+                'filter' => ''
+            ],
+            [
+                'name' => '_APP_DB_ADAPTER',
+                'description' => 'To switch between mariadb and postgresql',
+                'introduction' => '1.6.0',
+                'default' => 'mariadb',
+                'required' => true,
+                'question' => 'Choose your database (mariadb|postgresql)',
                 'filter' => ''
             ]
         ],

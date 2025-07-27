@@ -85,7 +85,6 @@ class Create extends Action
             ->inject('deviceForSites')
             ->inject('deviceForLocal')
             ->inject('queueForBuilds')
-            ->inject('plan')
             ->callback([$this, 'action']);
     }
 
@@ -104,8 +103,7 @@ class Create extends Action
         Event $queueForEvents,
         Device $deviceForSites,
         Device $deviceForLocal,
-        Build $queueForBuilds,
-        array $plan
+        Build $queueForBuilds
     ) {
         $activate = \strval($activate) === 'true' || \strval($activate) === '1';
 
@@ -138,14 +136,8 @@ class Create extends Action
             throw new Exception(Exception::STORAGE_FILE_EMPTY, 'No file sent');
         }
 
-        $siteSizeLimit = (int) System::getEnv('_APP_COMPUTE_SIZE_LIMIT', '30000000');
-
-        if (isset($plan['deploymentSize'])) {
-            $siteSizeLimit = $plan['deploymentSize'] * 1000 * 1000;
-        }
-
         $fileExt = new FileExt([FileExt::TYPE_GZIP]);
-        $fileSizeValidator = new FileSize($siteSizeLimit);
+        $fileSizeValidator = new FileSize(System::getEnv('_APP_COMPUTE_SIZE_LIMIT', '30000000'));
         $upload = new Upload();
 
         // Make sure we handle a single file and multiple files the same way
@@ -183,7 +175,7 @@ class Create extends Action
             }
         }
 
-        if (!$fileSizeValidator->isValid($fileSize) && $siteSizeLimit !== 0) { // Check if file size is exceeding allowed limit
+        if (!$fileSizeValidator->isValid($fileSize)) { // Check if file size is exceeding allowed limit
             throw new Exception(Exception::STORAGE_INVALID_FILE_SIZE);
         }
 
@@ -347,16 +339,10 @@ class Create extends Action
                         'domain' => $domain,
                         'type' => 'deployment',
                         'trigger' => 'deployment',
-                        'deploymentId' => $deployment->isEmpty() ? '' : $deployment->getId(),
-                        'deploymentInternalId' => $deployment->isEmpty() ? '' : $deployment->getInternalId(),
-                        'deploymentResourceType' => 'site',
-                        'deploymentResourceId' => $site->getId(),
-                        'deploymentResourceInternalId' => $site->getInternalId(),
+                        'value' => $deployment->getId(),
                         'status' => 'verified',
                         'certificateId' => '',
                         'search' => implode(' ', [$ruleId, $domain]),
-                        'owner' => 'Appwrite',
-                        'region' => $project->getAttribute('region')
                     ]))
                 );
             } else {

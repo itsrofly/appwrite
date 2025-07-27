@@ -36,7 +36,6 @@ class Comment
         $this->builds[$id] = [
             'projectName' => $project->getAttribute('name'),
             'projectId' => $project->getId(),
-            'region' => $project->getAttribute('region', 'default'),
             'resourceName' => $resource->getAttribute('name'),
             'resourceId' => $resource->getId(),
             'resourceType' => $resourceType,
@@ -67,7 +66,6 @@ class Comment
             if ($build['resourceType'] === 'site') {
                 $projects[$build['projectId']]['site'][$build['resourceId']] = [
                     'name' => $build['resourceName'],
-                    'region' => $build['region'],
                     'status' => $build['buildStatus'],
                     'deploymentId' => $build['deploymentId'],
                     'action' => $build['action'],
@@ -76,7 +74,6 @@ class Comment
             } elseif ($build['resourceType'] === 'function') {
                 $projects[$build['projectId']]['function'][$build['resourceId']] = [
                     'name' => $build['resourceName'],
-                    'region' => $build['region'],
                     'status' => $build['buildStatus'],
                     'deploymentId' => $build['deploymentId'],
                     'action' => $build['action'],
@@ -117,7 +114,7 @@ class Comment
                     };
 
                     if ($site['action']['type'] === 'logs') {
-                        $action = '[View Logs](' . $protocol . '://' . $hostname . '/console/project-' . $site['region'] . '-' . $projectId . '/sites/site-' . $siteId . '/deployments/deployment-' . $site['deploymentId'] . ')';
+                        $action = '[View Logs](' . $protocol . '://' . $hostname . '/console/project-' . $projectId . '/sites/site-' . $siteId . '/deployments/deployment-' . $site['deploymentId'] . ')';
                     } else {
                         $action = '[Authorize](' . $site['action']['url'] . ')';
                     }
@@ -149,12 +146,12 @@ class Comment
                 $text .= "| :- | :-  | :-  | :- |\n";
 
                 foreach ($project['function'] as $functionId => $function) {
-                    $extension = $function['status'] === 'building' ? 'gif' : 'png';
+                    $extension = $site['status'] === 'building' ? 'gif' : 'png';
 
-                    $pathLight = '/images/vcs/status-' . $function['status'] . '-light.' . $extension;
-                    $pathDark = '/images/vcs/status-' . $function['status'] . '-dark.' . $extension;
+                    $pathLight = '/images/vcs/status-' . $site['status'] . '-light.' . $extension;
+                    $pathDark = '/images/vcs/status-' . $site['status'] . '-dark.' . $extension;
 
-                    $status = match ($function['status']) {
+                    $status = match ($site['status']) {
                         'waiting' => $this->generatImage($pathLight, $pathDark, 'Queued', 85) . ' _Queued_',
                         'processing' => $this->generatImage($pathLight, $pathDark, 'Processing', 85) . ' _Processing_',
                         'building' => $this->generatImage($pathLight, $pathDark, 'Building', 85) . ' _Building_',
@@ -163,7 +160,7 @@ class Comment
                     };
 
                     if ($function['action']['type'] === 'logs') {
-                        $action = '[View Logs](' . $protocol . '://' . $hostname . '/console/project-' . $function['region'] . '-' . $projectId . '/functions/function-' . $functionId . '/deployment-' . $function['deploymentId'] . ')';
+                        $action = '[View Logs](' . $protocol . '://' . $hostname . '/console/project-' . $projectId . '/functions/function-' . $functionId . '/deployment-' . $function['deploymentId'] . ')';
                     } else {
                         $action = '[Authorize](' . $function['action']['url'] . ')';
                     }

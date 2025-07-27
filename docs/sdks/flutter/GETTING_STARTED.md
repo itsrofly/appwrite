@@ -56,25 +56,13 @@ For web in order to capture the OAuth2 callback URL and send it to the applicati
 ```html
 <!DOCTYPE html>
 <title>Authentication complete</title>
-<p>Authentication is complete. If this does not happen automatically, please close the window.</p>
+<p>Authentication is complete. If this does not happen automatically, please
+close the window.
 <script>
-  function postAuthenticationMessage() {
-    const message = {
-      'flutter-web-auth-2': window.location.href
-    };
-
-    if (window.opener) {
-      window.opener.postMessage(message, window.location.origin);
-      window.close();
-    } else if (window.parent && window.parent !== window) {
-      window.parent.postMessage(message, window.location.origin);
-    } else {
-      localStorage.setItem('flutter-web-auth-2', window.location.href);
-      window.close();
-    }
-  }
-
-  postAuthenticationMessage();
+  window.opener.postMessage({
+    'flutter-web-auth-2': window.location.href
+  }, window.location.origin);
+  window.close();
 </script>
 ```
 

@@ -180,7 +180,7 @@ class Create extends Action
             $queueForCertificates
                 ->setDomain(new Document([
                     'domain' => $rule->getAttribute('domain'),
-                    'domainType' => $rule->getAttribute('deploymentResourceType', $rule->getAttribute('type')),
+                    'domainType' => 'redirect',
                 ]))
                 ->trigger();
         }
