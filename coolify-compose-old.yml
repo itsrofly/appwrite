@@ -749,6 +749,17 @@ services:
       - MYSQL_PASSWORD=$SERVICE_PASSWORD_MARIADB
       - MARIADB_AUTO_UPGRADE=1
     command: "mysqld --innodb-flush-method=fsync"
+
+  appwrite-postgres:
+    image: "postgres:15"
+    container_name: appwrite-postgres
+    volumes:
+      - "appwrite-postgres:/var/lib/postgresql/data:rw"
+    environment:
+      - POSTGRES_DB=${_APP_DB_SCHEMA:-appwrite}
+      - POSTGRES_USER=$SERVICE_USER_POSTGRES
+      - POSTGRES_PASSWORD=$SERVICE_PASSWORD_POSTGRES
+
   appwrite-redis:
     image: "redis:7.2.4-alpine"
     container_name: appwrite-redis
