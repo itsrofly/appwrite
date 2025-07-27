@@ -12,7 +12,7 @@ services:
       - "appwrite-sites:/storage/sites:rw"
       - "appwrite-builds:/storage/builds:rw"
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
       - appwrite-redis
     environment:
       - SERVICE_FQDN_APPWRITE=/
@@ -45,11 +45,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_SMTP_HOST=${_APP_SMTP_HOST}"
       - "_APP_SMTP_PORT=${_APP_SMTP_PORT}"
       - "_APP_SMTP_SECURE=${_APP_SMTP_SECURE}"
@@ -129,7 +129,7 @@ services:
     entrypoint: realtime
     container_name: appwrite-realtime
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
       - appwrite-redis
     environment:
       - SERVICE_FQDN_APPWRITE=/v1/realtime
@@ -143,11 +143,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-audits:
@@ -156,7 +156,7 @@ services:
     container_name: appwrite-worker-audits
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -166,11 +166,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-webhooks:
     image: "appwrite/appwrite:1.7.4"
@@ -178,7 +178,7 @@ services:
     container_name: appwrite-worker-webhooks
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -186,11 +186,11 @@ services:
       - "_APP_EMAIL_SECURITY=${_APP_EMAIL_SECURITY:-certs@appwrite.io}"
       - "_APP_SYSTEM_SECURITY_EMAIL_ADDRESS=${_APP_SYSTEM_SECURITY_EMAIL_ADDRESS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
@@ -202,7 +202,7 @@ services:
     container_name: appwrite-worker-deletes
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     volumes:
       - "appwrite-uploads:/storage/uploads:rw"
       - "appwrite-cache:/storage/cache:rw"
@@ -219,11 +219,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_STORAGE_DEVICE=${_APP_STORAGE_DEVICE:-local}"
       - "_APP_STORAGE_S3_ACCESS_KEY=${_APP_STORAGE_S3_ACCESS_KEY}"
       - "_APP_STORAGE_S3_SECRET=${_APP_STORAGE_S3_SECRET}"
@@ -261,7 +261,7 @@ services:
     container_name: appwrite-worker-databases
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -271,11 +271,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-builds:
     image: "appwrite/appwrite:1.7.4"
@@ -283,7 +283,7 @@ services:
     container_name: appwrite-worker-builds
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     volumes:
       - "appwrite-functions:/storage/functions:rw"
       - "appwrite-sites:/storage/sites:rw"
@@ -300,11 +300,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_VCS_GITHUB_APP_NAME=${_APP_VCS_GITHUB_APP_NAME}"
       - "_APP_VCS_GITHUB_PRIVATE_KEY=${_APP_VCS_GITHUB_PRIVATE_KEY}"
@@ -347,7 +347,7 @@ services:
     container_name: appwrite-worker-certificates
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     volumes:
       - "appwrite-config:/storage/config:rw"
       - "appwrite-certificates:/storage/certificates:rw"
@@ -366,11 +366,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-functions:
     image: "appwrite/appwrite:1.7.4"
@@ -378,7 +378,7 @@ services:
     container_name: appwrite-worker-functions
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
       - openruntimes-executor
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -391,11 +391,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_FUNCTIONS_TIMEOUT=${_APP_FUNCTIONS_TIMEOUT:-900}"
       - "_APP_SITES_TIMEOUT=${_APP_SITES_TIMEOUT:-900}"
       - "_APP_COMPUTE_BUILD_TIMEOUT=${_APP_COMPUTE_BUILD_TIMEOUT:-900}"
@@ -420,11 +420,11 @@ services:
       - "_APP_SYSTEM_EMAIL_NAME=${_APP_SYSTEM_EMAIL_NAME:-Appwrite}"
       - "_APP_SYSTEM_EMAIL_ADDRESS=${_APP_SYSTEM_EMAIL_ADDRESS:-team@appwrite.io}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
@@ -454,11 +454,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_SMS_FROM=${_APP_SMS_FROM}"
       - "_APP_SMS_PROVIDER=${_APP_SMS_PROVIDER}"
@@ -491,7 +491,7 @@ services:
     volumes:
       - "appwrite-imports:/storage/imports:rw"
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -506,11 +506,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_MIGRATIONS_FIREBASE_CLIENT_ID=${_APP_MIGRATIONS_FIREBASE_CLIENT_ID}"
       - "_APP_MIGRATIONS_FIREBASE_CLIENT_SECRET=${_APP_MIGRATIONS_FIREBASE_CLIENT_SECRET}"
@@ -534,11 +534,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_MAINTENANCE_INTERVAL=${_APP_MAINTENANCE_INTERVAL}"
       - "_APP_MAINTENANCE_RETENTION_EXECUTION=${_APP_MAINTENANCE_RETENTION_EXECUTION}"
       - "_APP_MAINTENANCE_RETENTION_CACHE=${_APP_MAINTENANCE_RETENTION_CACHE:-2592000}"
@@ -553,17 +553,17 @@ services:
     entrypoint: stats-resources
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
@@ -578,17 +578,17 @@ services:
     container_name: appwrite-worker-stats-resources
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
@@ -602,17 +602,17 @@ services:
     container_name: appwrite-worker-stats-usage
     depends_on:
       - appwrite-redis
-      - appwrite-mariadb
+      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
@@ -625,7 +625,7 @@ services:
     entrypoint: schedule-functions
     container_name: appwrite-task-scheduler-functions
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
       - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -636,17 +636,17 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
   appwrite-task-scheduler-executions:
     image: "appwrite/appwrite:1.7.4"
     entrypoint: schedule-executions
     container_name: appwrite-task-scheduler-executions
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
       - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -657,17 +657,17 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
   appwrite-task-scheduler-messages:
     image: "appwrite/appwrite:1.7.4"
     entrypoint: schedule-messages
     container_name: appwrite-task-scheduler-messages
     depends_on:
-      - appwrite-mariadb
+      - appwrite-postgres
       - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -678,11 +678,11 @@ services:
       - "_APP_REDIS_USER=${_APP_REDIS_USER}"
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
-      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-mariadb}"
+      - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
-      - _APP_DB_USER=$SERVICE_USER_MARIADB
-      - _APP_DB_PASS=$SERVICE_PASSWORD_MARIADB
+      - _APP_DB_USER=$SERVICE_USER_POSTGRES
+      - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
   appwrite-assistant:
     image: "appwrite/assistant:0.4.0"
     container_name: appwrite-assistant
@@ -737,18 +737,6 @@ services:
       - "OPR_EXECUTOR_STORAGE_WASABI_SECRET=${_APP_STORAGE_WASABI_SECRET}"
       - "OPR_EXECUTOR_STORAGE_WASABI_REGION=${_APP_STORAGE_WASABI_REGION}"
       - "OPR_EXECUTOR_STORAGE_WASABI_BUCKET=${_APP_STORAGE_WASABI_BUCKET}"
-  appwrite-mariadb:
-    image: "mariadb:10.11"
-    container_name: appwrite-mariadb
-    volumes:
-      - "appwrite-mariadb:/var/lib/mysql:rw"
-    environment:
-      - MYSQL_ROOT_PASSWORD=$SERVICE_PASSWORD_MARIADBROOT
-      - "MYSQL_DATABASE=${_APP_DB_SCHEMA:-appwrite}"
-      - MYSQL_USER=$SERVICE_USER_MARIADB
-      - MYSQL_PASSWORD=$SERVICE_PASSWORD_MARIADB
-      - MARIADB_AUTO_UPGRADE=1
-    command: "mysqld --innodb-flush-method=fsync"
 
   appwrite-postgres:
     image: "postgres:15"
@@ -770,7 +758,7 @@ networks:
   runtimes:
     name: runtimes
 volumes:
-  appwrite-mariadb: null
+  appwrite-postgres: null
   appwrite-redis: null
   appwrite-cache: null
   appwrite-uploads: null
