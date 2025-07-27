@@ -90,7 +90,7 @@ services:
       - "_APP_COMPUTE_MEMORY=${_APP_COMPUTE_MEMORY:-0}"
       - "_APP_FUNCTIONS_RUNTIMES=${_APP_FUNCTIONS_RUNTIMES:-node-20.0,php-8.2,python-3.11,ruby-3.2}"
       - "_APP_SITES_RUNTIMES=${_APP_SITES_RUNTIMES}"
-      - "_APP_DOMAIN_SITES=${_APP_DOMAIN_SITES:-appwrite.network}"
+      - "_APP_DOMAIN_SITES=${MY_DOMAIN_APPWRITE:-appwrite.itsrofly.com}"
       - _APP_EXECUTOR_SECRET=${PASSWORD_64_APPWRITE}
       - "_APP_EXECUTOR_HOST=${_APP_EXECUTOR_HOST:-http://exc1/v1}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
@@ -324,7 +324,7 @@ services:
       - "_APP_STORAGE_WASABI_SECRET=${_APP_STORAGE_WASABI_SECRET}"
       - "_APP_STORAGE_WASABI_REGION=${_APP_STORAGE_WASABI_REGION:-eu-central-1}"
       - "_APP_STORAGE_WASABI_BUCKET=${_APP_STORAGE_WASABI_BUCKET}"
-      - "_APP_DOMAIN_SITES=${_APP_DOMAIN_SITES}"
+      - "_APP_DOMAIN_SITES=${MY_DOMAIN_APPWRITE:-appwrite.itsrofly.com}"
   appwrite-worker-certificates:
     image: appwrite-pg
     entrypoint: worker-certificates
