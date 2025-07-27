@@ -44,8 +44,8 @@ services:
       - _APP_DOMAIN_FUNCTIONS=$SERVICE_URL_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -142,8 +142,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -165,8 +165,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -195,8 +195,8 @@ services:
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
   appwrite-worker-deletes:
     image: appwrite-pg
@@ -218,8 +218,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -270,8 +270,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -299,8 +299,8 @@ services:
       - "_APP_EXECUTOR_HOST=${_APP_EXECUTOR_HOST:-http://appwrite-executor/v1}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -365,8 +365,8 @@ services:
       - "_APP_EMAIL_CERTIFICATES=${_APP_EMAIL_CERTIFICATES:-enabled}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -390,8 +390,8 @@ services:
       - "_APP_OPTIONS_FORCE_HTTPS=${_APP_OPTIONS_FORCE_HTTPS:-disabled}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -429,8 +429,8 @@ services:
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_SMTP_HOST=${_APP_SMTP_HOST}"
       - "_APP_SMTP_PORT=${_APP_SMTP_PORT}"
       - "_APP_SMTP_SECURE=${_APP_SMTP_SECURE}"
@@ -453,8 +453,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -505,8 +505,8 @@ services:
       - "_APP_EMAIL_SECURITY=${_APP_EMAIL_SECURITY:-certs@appwrite.io}"
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -533,8 +533,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -568,8 +568,8 @@ services:
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_DATABASE_SHARED_TABLES=${_APP_DATABASE_SHARED_TABLES}"
@@ -593,8 +593,8 @@ services:
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_STATS_RESOURCES_INTERVAL=${_APP_STATS_RESOURCES_INTERVAL}"
@@ -617,8 +617,8 @@ services:
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_USAGE_STATS=${_APP_USAGE_STATS:-enabled}"
       - "_APP_LOGGING_CONFIG=${_APP_LOGGING_CONFIG}"
       - "_APP_USAGE_AGGREGATION_INTERVAL=${_APP_USAGE_AGGREGATION_INTERVAL:-30}"
@@ -635,8 +635,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -656,8 +656,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -677,8 +677,8 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_REDIS_HOST=${_APP_REDIS_HOST:-appwrite-redis}"
       - "_APP_REDIS_PORT=${_APP_REDIS_PORT:-6379}"
-      - "_APP_REDIS_USER=${_APP_REDIS_USER}"
-      - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
+      - "_APP_REDIS_USER=${_APP_REDIS_USER:-default}"
+      - "_APP_REDIS_PASS=${_APP_REDIS_PASS:-redispwd}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
       - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
@@ -756,11 +756,14 @@ services:
   appwrite-redis:
     image: "redis:7.2.4-alpine"
     container_name: appwrite-redis
+    environment:
+      - REDIS_PASSWORD=${_APP_REDIS_PASS:-redispwd}
     command: >
       redis-server
       --maxmemory            512mb
       --maxmemory-policy     allkeys-lru
       --maxmemory-samples    5
+      --requirepass ${_APP_REDIS_PASS:-redispwd}
     ports:
       - "6379:6379"
     volumes:
