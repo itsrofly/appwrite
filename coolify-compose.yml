@@ -358,7 +358,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-functions
     container_name: appwrite-worker-functions
-
+    depends_on:
       - openruntimes-executor
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
