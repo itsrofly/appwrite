@@ -46,7 +46,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -144,7 +144,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -167,7 +167,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -187,7 +187,7 @@ services:
       - "_APP_SYSTEM_SECURITY_EMAIL_ADDRESS=${_APP_SYSTEM_SECURITY_EMAIL_ADDRESS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -220,7 +220,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -272,7 +272,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -301,7 +301,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -367,7 +367,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -392,7 +392,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -421,7 +421,7 @@ services:
       - "_APP_SYSTEM_EMAIL_ADDRESS=${_APP_SYSTEM_EMAIL_ADDRESS:-team@appwrite.io}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -455,7 +455,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -507,7 +507,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -535,7 +535,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -560,7 +560,7 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -585,7 +585,7 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -609,7 +609,7 @@ services:
       - _APP_OPENSSL_KEY_V1=$SERVICE_PASSWORD_64_APPWRITE
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -637,7 +637,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -658,7 +658,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
@@ -679,7 +679,7 @@ services:
       - "_APP_REDIS_PASS=${_APP_REDIS_PASS}"
       - "_APP_DB_ADAPTER=${_APP_DB_ADAPTER:-postgresql}"
       - "_APP_DB_HOST=${_APP_DB_HOST:-appwrite-postgres}"
-      - "_APP_DB_PORT=${_APP_DB_PORT:-3306}"
+      - "_APP_DB_PORT=${_APP_DB_PORT:-5432}"
       - "_APP_DB_SCHEMA=${_APP_DB_SCHEMA:-appwrite}"
       - _APP_DB_USER=$SERVICE_USER_POSTGRES
       - _APP_DB_PASS=$SERVICE_PASSWORD_POSTGRES
