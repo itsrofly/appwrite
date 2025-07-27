@@ -17,7 +17,7 @@ services:
       - appwrite-postgres
       - appwrite-redis
     environment:
-      - SERVICE_FQDN_APPWRITE=/
+      - SERVICE_FQDN_APPWRITE=https://appwrite.itsrofly.com
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - "_APP_LOCALE=${_APP_LOCALE:-en}"
@@ -125,7 +125,7 @@ services:
     image: appwrite/console:6.0.7
     container_name: appwrite-console
     environment:
-      - SERVICE_FQDN_APPWRITE=/console
+      - SERVICE_FQDN_APPWRITE=https://appwrite.itsrofly.com/console
   appwrite-realtime:
     image: appwrite-pg
     entrypoint: realtime
@@ -134,7 +134,7 @@ services:
       - appwrite-postgres
       - appwrite-redis
     environment:
-      - SERVICE_FQDN_APPWRITE=/v1/realtime
+      - SERVICE_FQDN_APPWRITE=https://appwrite.itsrofly.com/v1/realtime
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
       - "_APP_OPTIONS_ABUSE=${_APP_OPTIONS_ABUSE:-enabled}"
