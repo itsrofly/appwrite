@@ -13,9 +13,7 @@ services:
       - "appwrite-functions:/storage/functions:rw"
       - "appwrite-sites:/storage/sites:rw"
       - "appwrite-builds:/storage/builds:rw"
-    depends_on:
-      - appwrite-postgres
-      - appwrite-redis
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -127,9 +125,7 @@ services:
     image: appwrite-pg
     entrypoint: realtime
     container_name: appwrite-realtime
-    depends_on:
-      - appwrite-postgres
-      - appwrite-redis
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -152,9 +148,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-audits
     container_name: appwrite-worker-audits
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -174,9 +168,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-webhooks
     container_name: appwrite-worker-webhooks
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -198,9 +190,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-deletes
     container_name: appwrite-worker-deletes
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     volumes:
       - "appwrite-uploads:/storage/uploads:rw"
       - "appwrite-cache:/storage/cache:rw"
@@ -257,9 +247,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-databases
     container_name: appwrite-worker-databases
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -279,9 +267,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-builds
     container_name: appwrite-worker-builds
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     volumes:
       - "appwrite-functions:/storage/functions:rw"
       - "appwrite-sites:/storage/sites:rw"
@@ -343,9 +329,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-certificates
     container_name: appwrite-worker-certificates
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     volumes:
       - "appwrite-config:/storage/config:rw"
       - "appwrite-certificates:/storage/certificates:rw"
@@ -374,9 +358,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-functions
     container_name: appwrite-worker-functions
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
       - openruntimes-executor
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
@@ -409,8 +391,6 @@ services:
     image: appwrite-pg
     entrypoint: worker-mails
     container_name: appwrite-worker-mails
-    depends_on:
-      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -441,8 +421,6 @@ services:
     container_name: appwrite-worker-messaging
     volumes:
       - "appwrite-uploads:/storage/uploads:rw"
-    depends_on:
-      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -488,8 +466,6 @@ services:
     container_name: appwrite-worker-migrations
     volumes:
       - "appwrite-imports:/storage/imports:rw"
-    depends_on:
-      - appwrite-postgres
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -516,8 +492,6 @@ services:
     image: appwrite-pg
     entrypoint: maintenance
     container_name: appwrite-task-maintenance
-    depends_on:
-      - appwrite-redis
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -549,9 +523,7 @@ services:
     image: appwrite-pg
     container_name: appwrite-task-stats-resources
     entrypoint: stats-resources
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -574,9 +546,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-stats-resources
     container_name: appwrite-worker-stats-resources
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -598,9 +568,7 @@ services:
     image: appwrite-pg
     entrypoint: worker-stats-usage
     container_name: appwrite-worker-stats-usage
-    depends_on:
-      - appwrite-redis
-      - appwrite-postgres
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -622,9 +590,7 @@ services:
     image: appwrite-pg
     entrypoint: schedule-functions
     container_name: appwrite-task-scheduler-functions
-    depends_on:
-      - appwrite-postgres
-      - appwrite-redis
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -643,9 +609,7 @@ services:
     image: appwrite-pg
     entrypoint: schedule-executions
     container_name: appwrite-task-scheduler-executions
-    depends_on:
-      - appwrite-postgres
-      - appwrite-redis
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -664,9 +628,7 @@ services:
     image: appwrite-pg
     entrypoint: schedule-messages
     container_name: appwrite-task-scheduler-messages
-    depends_on:
-      - appwrite-postgres
-      - appwrite-redis
+
     environment:
       - "_APP_ENV=${_APP_ENV:-production}"
       - "_APP_WORKER_PER_CORE=${_APP_WORKER_PER_CORE:-6}"
@@ -737,40 +699,10 @@ services:
       - "OPR_EXECUTOR_STORAGE_WASABI_REGION=${_APP_STORAGE_WASABI_REGION}"
       - "OPR_EXECUTOR_STORAGE_WASABI_BUCKET=${_APP_STORAGE_WASABI_BUCKET}"
 
-  appwrite-postgres:
-    image: "postgres:15"
-    container_name: appwrite-postgres
-    volumes:
-      - "appwrite-postgres:/var/lib/postgresql/data:rw"
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=${_APP_DB_SCHEMA:-appwrite}
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
-    command: "postgres"
-  appwrite-redis:
-    image: "redis:7.2.4-alpine"
-    container_name: appwrite-redis
-    environment:
-      - REDIS_PASSWORD=${_APP_REDIS_PASS:-redispwd}
-    command: >
-      redis-server
-      --maxmemory            512mb
-      --maxmemory-policy     allkeys-lru
-      --maxmemory-samples    5
-      --requirepass ${_APP_REDIS_PASS:-redispwd}
-    ports:
-      - "6379:6379"
-    volumes:
-      - "appwrite-redis:/data:rw"
-
 networks:
   runtimes:
     name: runtimes
 volumes:
-  appwrite-postgres: null
-  appwrite-redis: null
   appwrite-cache: null
   appwrite-uploads: null
   appwrite-imports: null
